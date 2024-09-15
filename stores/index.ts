@@ -7,22 +7,22 @@
 
   import { apiSlice } from '../slices/apiSlice';
   import { loginStateSlice } from "@/slices/auth/loginStates";
+import { useRouter } from "next/router";
 
 
 
-
-  export const rtkQueryErrorLogger: Middleware =
-    (api: MiddlewareAPI) => (next) => (action) => {
-      if (isRejectedWithValue(action)) {
-        console.warn(`We got a rejected action! ${action.error.message}`)
-        console.log(action.payload)
-        if(action.payload.status == 401 || action.payload.status == 403){
-          window.location.replace(`${process.env.NEXT_PUBLIC_API_URL}/login`)
-        }
-    
+  export const rtkQueryErrorLogger: Middleware = (api: MiddlewareAPI) => (next) => (action) => {
+    const router = useRouter();
+  
+    if (isRejectedWithValue(action)) {
+      console.warn(`We got a rejected action! ${action.error.message}`);
+      console.log(action.payload);
+      if (action.payload.status == 401 || action.payload.status == 403) {
+        router.push('/login');
       }
-      return next(action)
-  }
+    }
+    return next(action);
+  };
 
   export const store = configureStore({
       reducer: {
