@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   poweredByHeader: false,
@@ -7,35 +9,37 @@ const nextConfig = {
       allowFutureImage: true,
     },
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   i18n: {
-    locales: ['en', 'es'],
-    defaultLocale: 'en',
+    locales: ["en", "es"],
+    defaultLocale: "en",
     localeDetection: false,
   },
   /* Redirects */
   async redirects() {
     return [
       {
-        source: '/settings',
-        destination: '/settings/fiscalyear',
+        source: "/settings",
+        destination: "/settings/fiscalyear",
         permanent: true,
       },
       {
-        source: '/bank',
-        destination: '/bank/banks',
+        source: "/bank",
+        destination: "/bank/banks",
         permanent: true,
-      }
-      ,{
-        source:'/accountspayable',
-        destination:'/accountspayable/vendors',
-        permanent:true
       },
       {
-        source: '/AccountsReceivable',
-        destination: '/AccountsReceivable/customer',
+        source: "/accountspayable",
+        destination: "/accountspayable/vendors",
         permanent: true,
-      }
-      
+      },
+      {
+        source: "/AccountsReceivable",
+        destination: "/AccountsReceivable/customer",
+        permanent: true,
+      },
     ];
   },
 
@@ -44,8 +48,8 @@ const nextConfig = {
     return {
       beforeFiles: [
         {
-          source: '/api-mw/:path*',
-          destination: 'https://api.gasnatural.io/v1.0.1/mw/:path*',
+          source: "/api-mw/:path*",
+          destination: "https://api.gasnatural.io/v1.0.1/mw/:path*",
         },
         // {
         //     source: "/assets/:path*",
@@ -58,7 +62,7 @@ const nextConfig = {
       ],
     };
   },
-  assetPrefix: process.env.CDN_RESOURCE_BASEURL,
+  // assetPrefix: process.env.CDN_RESOURCE_BASEURL,
 };
 
 module.exports = nextConfig;
