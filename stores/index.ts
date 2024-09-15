@@ -17,9 +17,8 @@
         console.warn(`We got a rejected action! ${action.error.message}`)
         console.log(action.payload)
         if(action.payload.status == 401 || action.payload.status == 403){
-          window.location.replace(`https://whitestone-frontend-aman-49h2j9rrj-aman1nagals-projects.vercel.app/login`)
+          window.location.replace("http://localhost:3000/login")
         }
-    
       }
       return next(action)
   }
