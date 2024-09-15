@@ -10,6 +10,7 @@ const Createtask = ({
   createtask,
   getById,
   updateDeleteModal,
+  updateTaskMutaion,
 }: any) => {
   const ValidationSchema = Yup.object().shape({
     title: Yup.string()
@@ -49,9 +50,21 @@ const Createtask = ({
           <Formik
             initialValues={getByIdd && updateDeleteModal ? getByIdd : initial}
             onSubmit={(values, actions): any => {
-              createtask(values).then(() => {
-                hideModal(true);
-              });
+              const payLoad = {
+                taskId: getById,
+                taskData: {
+                  title: values.title,
+                  description: values.description,
+                  status: values.status,
+                },
+              };
+              if (!getByIdd && !updateDeleteModal)
+                createtask(values).then(() => {
+                  hideModal(true);
+                });
+              else {
+                updateTaskMutaion(payLoad);
+              }
             }}
             enableReinitialize
             validationSchema={ValidationSchema}
@@ -133,7 +146,7 @@ const Createtask = ({
 
                 <div className="flex absolute bg-white bottom-0 w-full items-center justify-end p-6 border-t border-solid rounded-b border-slate-200">
                   <button
-                    className="px-16 py-2 mb-1 mr-2 text-sm transition-all duration-150 ease-linear drop-shadow-sm shadow-sm-light shadow-pvShadowPrimary/20 bg-gray-200 text-pvPrimaryText font-medium rounded-md outline-none focus:outline-none"
+                    className="md:px-12 sm:px-2 py-2 mb-1 mr-2 text-sm transition-all duration-150 ease-linear drop-shadow-sm shadow-sm-light shadow-pvShadowPrimary/20 bg-gray-200 text-pvPrimaryText font-medium rounded-md outline-none focus:outline-none"
                     type="button"
                     onClick={() => hideModal(true)}
                   >
@@ -141,7 +154,7 @@ const Createtask = ({
                   </button>
 
                   <button
-                    className="px-12 py-2 mb-1 mr-1 text-sm text-white transition-all duration-150 ease-linear rounded shadow outline-none bg-blue-500 focus:outline-none"
+                    className="md:px-12 sm:px-8 py-2 mb-1 mr-1 text-sm text-white transition-all duration-150 ease-linear rounded shadow outline-none bg-blue-500 focus:outline-none"
                     type="submit"
                   >
                     {updateDeleteModal ? "Update Task" : "Create Task"}

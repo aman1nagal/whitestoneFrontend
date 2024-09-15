@@ -25,7 +25,6 @@ export const apiSlice = createApi({
         try {
           // Wait for the cache to load before listening to socket events
           await cacheDataLoaded;
-
           // Listen for 'task-created' event and update the cache
           socket.on("task-created", (newTask) => {
             updateCachedData((draft) => {
@@ -36,6 +35,7 @@ export const apiSlice = createApi({
           // Listen for 'task-updated' event and update the cache
           socket.on("task-updated", (updatedTask) => {
             updateCachedData((draft) => {
+
               const index = draft.findIndex((task) => task._id === updatedTask._id);
               if (index !== -1) {
                 draft[index] = updatedTask;
@@ -45,6 +45,7 @@ export const apiSlice = createApi({
 
           // Listen for 'task-deleted' event and update the cache
           socket.on("task-deleted", (deletedTaskId) => {
+            
             updateCachedData((draft) => {
               return draft.filter((task) => task._id !== deletedTaskId);
             });

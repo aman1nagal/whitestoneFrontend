@@ -10,7 +10,13 @@ import {} from "@/slices/auth";
 import { Table } from "@/components/Table/Table";
 import Createtask from "@/components/Createtask";
 import Success from "@/components/Popup/Success";
-import { useCreateTaskMutation, useViewTasksQuery } from "@/slices/apiSlice";
+import {
+  useCreateTaskMutation,
+  useDeleteTaskMutation,
+  useUpdateTaskMutation,
+  useViewTasksQuery,
+} from "@/slices/apiSlice";
+import { ConfirmModal } from "@/components/Popup/ConfirmModal";
 
 const IndexPage = () => {
   const { data: Tasks, error, isLoading } = useViewTasksQuery({});
@@ -24,6 +30,7 @@ const IndexPage = () => {
   const [successModal, setSuccessModal] = useState(false);
   const [updateDeleteModal, setUpdateDeleteModal] = useState(false);
   const [idForDeleteUpdate, setIdForDeleteUpdate] = useState("");
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const columns = useMemo(
     () => [
       {
@@ -65,6 +72,7 @@ const IndexPage = () => {
           const refElement = useRef();
           const popElement = useRef();
           const [showFilter, setShowFilter] = useState(false);
+
           const { styles, attributes } = usePopper(
             refElement.current,
             popElement.current,
@@ -100,10 +108,12 @@ const IndexPage = () => {
           const deleteModal = () => {
             setIdForDeleteUpdate(row.original?._id);
             setShowFilter(false);
+            setOpenDeleteModal(true);
           };
           const viewEdit = () => {
             setIdForDeleteUpdate(row.original?._id);
             setShowFilter(false);
+            // setOpenDeleteModal(false);
           };
           const actions = [
             { text: "Delete", action: () => deleteModal() },
@@ -143,25 +153,36 @@ const IndexPage = () => {
     []
   );
 
+  const [
+    createTaskMutation,
+    { isLoading: createTaskLoaing, data: createdTaskData },
+  ] = useCreateTaskMutation();
+  const [
+    updateTaskMutaion,
+    { isLoading: updateTaskLoading, data: updateTaskData },
+  ] = useUpdateTaskMutation();
+  const [deleteTask, { isLoading: deleteTaskLoading, data: DeleteTaskData }] =
+    useDeleteTaskMutation();
+  console.log(createdTaskData, updateTaskData, "asdasads");
+
   useEffect(() => {
-    if (data) {
+    if (createdTaskData || updateTaskData) {
       setSuccessModal(true);
+      setCreateTask(false);
     }
     setTimeout(() => {
       setSuccessModal(false);
     }, 1200);
-  }, [Tasks]);
+  }, [Tasks, updateTaskData]);
 
   // useEffect(() => {
   //   if (authState == "false" || authState == null) {
   //     router.push("/login");
   //   }
   // }, []);
-  const [createTaskMutation, { isLoading: createTaskLoaing, data }] =
-    useCreateTaskMutation();
 
   useEffect(() => {
-    if (idForDeleteUpdate) {
+    if (idForDeleteUpdate && !openDeleteModal) {
       setCreateTask(true);
       setUpdateDeleteModal(true);
     }
@@ -171,22 +192,39 @@ const IndexPage = () => {
     localStorage.setItem("auth", "false");
     router.push("/login");
   };
+  const handleDelete = () => {
+    deleteTask(idForDeleteUpdate);
+    setOpenDeleteModal(false);
+  };
   return (
     <div className="flex flex-col w-full bg-white h-screen right-20">
       {authState && (
         <div className="">
-          {createtask && (
+          {createtask && !openDeleteModal && (
             <Createtask
               hideModal={() => setCreateTask(false)}
               createtask={createTaskMutation}
+              updateTaskMutaion={updateTaskMutaion}
               getById={idForDeleteUpdate}
               updateDeleteModal={updateDeleteModal}
             />
           )}
 
+          {openDeleteModal && (
+            <ConfirmModal
+              hideModal={() => setOpenDeleteModal(false)}
+              action={handleDelete}
+              message={"Are you sure you want to Delete your Task ?"}
+            />
+          )}
+
           {successModal && (
             <Success
-              message="Task Created Success"
+              message={`${
+                idForDeleteUpdate
+                  ? "Task Updated Successfully"
+                  : "Task Created Successfully"
+              }`}
               hideModal={() => setSuccessModal(false)}
             />
           )}

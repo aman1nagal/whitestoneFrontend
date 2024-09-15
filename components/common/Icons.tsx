@@ -17,6 +17,53 @@ export function SortIcon({ className = "" }) {
   );
 }
 
+export const Delete = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="80"
+    height="80"
+    viewBox="0 0 80 80"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="40" cy="40" r="40" fill="#ED5757" />
+    <path
+      d="M55.75 29.4648C49.9225 28.8873 44.06 28.5898 38.215 28.5898C34.75 28.5898 31.285 28.7648 27.82 29.1148L24.25 29.4648"
+      stroke="white"
+      strokeWidth="3.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M33.875 27.6975L34.26 25.405C34.54 23.7425 34.75 22.5 37.7075 22.5H42.2925C45.25 22.5 45.4775 23.8125 45.74 25.4225L46.125 27.6975"
+      stroke="white"
+      strokeWidth="3.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M51.9875 34.9941L50.85 52.6166C50.6575 55.3641 50.5 57.4991 45.6175 57.4991H34.3825C29.5 57.4991 29.3425 55.3641 29.15 52.6166L28.0125 34.9941"
+      stroke="white"
+      strokeWidth="3.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M37.0774 47.875H42.9049"
+      stroke="white"
+      strokeWidth="3.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M35.625 40.875H44.375"
+      stroke="white"
+      strokeWidth="3.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 export const ArrowDown = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
