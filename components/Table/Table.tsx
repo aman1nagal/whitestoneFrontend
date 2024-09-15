@@ -11,7 +11,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import React, { useEffect, useState } from "react";
-import clsx from "clsx";
 
 // @ts-ignore
 
@@ -42,7 +41,6 @@ function Table({
   onTableDismount = () => {},
 }: TableI) {
   const [sorting, setSorting] = useState<any>([]);
-
 
   useEffect(() => {
     return () => onTableDismount();
@@ -104,16 +102,9 @@ function Table({
                     >
                       {header.isPlaceholder ? null : (
                         <div
-                          className={clsx(
-                            "flex items-center gap-1 text-black-b-250 font-semibold uppercase",
-                            header.column.columnDef.header == "Action" ||
-                              header.column.columnDef.header == "Status" ||
-                              header.column.columnDef.header == "Logo" ||
-                              header.column.columnDef.header == "Channels" ||
-                              header.column.columnDef.header == "Payment Status"
-                              ? "justify-start"
-                              : ""
-                          )}
+                          className={
+                            "flex items-center gap-1 text-black-b-250 font-semibold uppercase"
+                          }
                         >
                           {/* {header.column.getIsPinned()} */}
                           {flexRender(
