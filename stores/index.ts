@@ -9,8 +9,6 @@
   import { loginStateSlice } from "@/slices/auth/loginStates";
 import { useRouter } from "next/router";
 
-
-
   export const rtkQueryErrorLogger: Middleware = (api: MiddlewareAPI) => (next) => (action) => {
     const router = useRouter();
   
