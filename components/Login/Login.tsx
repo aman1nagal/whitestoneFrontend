@@ -19,6 +19,7 @@ import AppleImg from "../common/Apple";
 import LoginSvg from "../common/LoginSvg";
 import { RegistraionSVG4 } from "../common/RegistraionSVG";
 import { useLoginMutation } from "@/slices/auth";
+import { Loader } from "../Loader";
 
 const ValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -32,7 +33,7 @@ const Login = () => {
   const dispatch = useDispatch();
   // const authStatus = useSelector(authstatus); // renamed to authStatus
   const router = useRouter();
-  const [loginMutation] = useLoginMutation();
+  const [loginMutation, { isLoading }] = useLoginMutation();
   const isWindow = typeof window !== "undefined";
 
   // redirect to / if local storage have value
@@ -59,6 +60,8 @@ const Login = () => {
   return (
     <>
       <div className="flex h-screen">
+        {isLoading && <Loader isLoading={isLoading} />}
+        {console.log(isLoading, "isLoading")}
         <div className="w-full md:w-1/2 bg-blue-100 flex items-center justify-center relative">
           <div className="hidden md:inline-block">{/* <LeftImg /> */}</div>
           <div className="absolute top-60 left-4 text-lg font-bold text-orange-400">

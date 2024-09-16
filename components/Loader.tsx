@@ -14,9 +14,9 @@ const Loader = ({ isLoading = false, bgOpacity = 1 }: Loaderprops) => {
       >
         <div className="text-center">
           <div className="flex items-center justify-center space-x-2 animate-bounce">
-            <div className="w-4 h-4 bg-primary-o-600 rounded-full"></div>
-            <div className="w-4 h-4 bg-status-danger-800 rounded-full"></div>
-            <div className="w-4 h-4 bg-status-warning-800 rounded-full"></div>
+            <div className="w-4 h-4 bg-blue-600 rounded-full"></div>
+            <div className="w-4 h-4 bg-red-600 rounded-full"></div>
+            <div className="w-4 h-4 bg-yellow-600 rounded-full"></div>
           </div>
         </div>
       </div>

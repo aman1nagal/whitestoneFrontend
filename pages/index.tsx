@@ -175,11 +175,11 @@ const IndexPage = () => {
     }, 1200);
   }, [Tasks, updateTaskData]);
 
-  // useEffect(() => {
-  //   if (authState == "false" || authState == null) {
-  //     router.push("/login");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (authState == "false" || authState == null) {
+      router.push("/login");
+    }
+  }, []);
 
   useEffect(() => {
     if (idForDeleteUpdate && !openDeleteModal) {

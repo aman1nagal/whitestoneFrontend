@@ -87,8 +87,8 @@ function Table({
     <>
       <Loader isLoading={isLoading} bgOpacity={0.3} />
       <div className="flex px-20 w-full bg-white relative z-20">
-        <div className="overflow-y-auto relative table-height main-table-wrap w-full">
-          <table className="w-full border mainTable hidden md:table">
+        <div className="overflow-y-auto border relative table-height main-table-wrap w-full">
+          <table className="w-full  mainTable hidden md:table">
             <thead className="sticky z-20 top-0 w-full">
               {table.getHeaderGroups().map((headerGroup, index) => (
                 <tr key={headerGroup.id}>
