@@ -58,11 +58,10 @@ const Createtask = ({
                   status: values.status,
                 },
               };
-              if (!getByIdd && !updateDeleteModal)
-                createtask(values).then(() => {
-                  hideModal(true);
-                });
-              else {
+              if (!getByIdd && !updateDeleteModal) {
+                createtask(values);
+                hideModal(true);
+              } else {
                 updateTaskMutaion(payLoad);
               }
             }}
@@ -73,7 +72,6 @@ const Createtask = ({
               <Form>
                 <div className="relative flex flex-col overflow-y-scroll formHeight580 p-6">
                   <div className="flex gap-2">
-                    {console.log(getByIdd, values, "values")}
                     <div className="grid grid-cols-1 w-full mb-4">
                       <div>
                         <div className="block text-sm font-medium text-pvPrimaryText mb-1 text-left cursor-default">
