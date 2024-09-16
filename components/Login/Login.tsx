@@ -45,7 +45,6 @@ const Login = () => {
   const handleSubmit = (values, { setFieldError }) => {
     if (values) {
       loginMutation(values).then((res: any) => {
-        console.log(res);
         if (isWindow && res?.data?.token) {
           localStorage.setItem("token", res?.data?.token);
           localStorage.setItem("auth", "true");

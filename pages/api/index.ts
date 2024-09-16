@@ -5,10 +5,10 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
       const data = req.body;
-      console.log("service-address: ", JSON.stringify(data.prefix));
+      // console.log("service-address: ", JSON.stringify(data.prefix));
 
       const response = await axios.get(`https://api.gasnatural.io/v1.0.1/service/address/${data.prefix}`);
-      console.log(`service response1 : ${response.data}`);
+      // console.log(`service response1 : ${response.data}`);
     
       res.status(200).send(response.data);
     } catch (error) {

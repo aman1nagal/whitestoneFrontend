@@ -17,6 +17,7 @@ import {
   useViewTasksQuery,
 } from "@/slices/apiSlice";
 import { ConfirmModal } from "@/components/Popup/ConfirmModal";
+import { Loader } from "@/components/Loader";
 
 const IndexPage = () => {
   const { data: Tasks, error, isLoading } = useViewTasksQuery({});
@@ -163,7 +164,6 @@ const IndexPage = () => {
   ] = useUpdateTaskMutation();
   const [deleteTask, { isLoading: deleteTaskLoading, data: DeleteTaskData }] =
     useDeleteTaskMutation();
-  console.log(createdTaskData, updateTaskData, "asdasads");
 
   useEffect(() => {
     if (createdTaskData || updateTaskData) {
@@ -209,6 +209,7 @@ const IndexPage = () => {
               updateDeleteModal={updateDeleteModal}
             />
           )}
+          {isLoading && <Loader isLoading={isLoading} />}
 
           {openDeleteModal && (
             <ConfirmModal
